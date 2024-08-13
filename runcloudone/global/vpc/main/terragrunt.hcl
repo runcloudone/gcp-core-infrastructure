@@ -11,15 +11,27 @@ locals {
 }
 
 inputs = {
-  network_name = "${local.name}-vpc"
-  routing_mode = "GLOBAL"
+  network_name = local.name
 
   subnets = [
     {
       subnet_name           = "${local.name}-us-central1-subnet"
-      subnet_ip             = "10.0.1.0/24"
+      subnet_ip             = "172.16.0.0/24"
       subnet_region         = "us-central1"
       subnet_private_access = "true"
     }
   ]
+
+  secondary_ranges = {
+    "${local.name}-us-central1-subnet" = [
+      {
+        range_name    = "gke-services"
+        ip_cidr_range = "10.0.0.0/24"
+      },
+      {
+        range_name    = "gke-pods"
+        ip_cidr_range = "10.0.4.0/22"
+      }
+    ]
+  }
 }
