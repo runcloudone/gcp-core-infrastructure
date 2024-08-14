@@ -40,7 +40,7 @@ inputs = {
     {
       name               = "default-pool"
       version            = "1.27.16-gke.1008000"
-      machine_type       = "n1-standard-2"
+      machine_type       = "e2-standard-2"
       min_count          = 1
       max_count          = 3
       initial_node_count = 1
