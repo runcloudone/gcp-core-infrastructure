@@ -7,8 +7,8 @@ terraform {
   source = "tfr:///terraform-google-modules/kubernetes-engine/google?version=32.0.0"
 }
 
-dependency "vpc_main" {
-  config_path                             = "../../../global/vpc/main"
+dependency "vpc_shared_01" {
+  config_path                             = "../../../global/vpc/shared-01"
   mock_outputs_allowed_terraform_commands = ["init", "validate", "plan", "terragrunt-info", "show", "destroy"]
   mock_outputs                            = {}
 }
@@ -17,19 +17,19 @@ locals {
   name   = basename(get_terragrunt_dir())
   region = include.root.inputs.region
 
-  network_name    = "main"
-  subnetwork_name = "${local.network_name}-${local.region}-subnet"
+  network_name    = "vnet-shared-01"
+  subnetwork_name = "snet-k8s-01"
 }
 
 inputs = {
-  name   = local.name
+  name   = "k8s-${local.name}"
   region = local.region
 
   network    = local.network_name
   subnetwork = local.subnetwork_name
 
-  ip_range_services = "gke-services"
-  ip_range_pods     = "gke-pods"
+  ip_range_services = "k8s-services"
+  ip_range_pods     = "k8s-pods"
 
   release_channel     = "UNSPECIFIED"
   kubernetes_version  = "1.27.16-gke.1008000"
@@ -48,7 +48,6 @@ inputs = {
       disk_size_gb       = 30
       disk_type          = "pd-standard"
       auto_upgrade       = false
-      node_locations     = "us-central1-b,us-central1-c,us-central1-f"
     }
   ]
 }

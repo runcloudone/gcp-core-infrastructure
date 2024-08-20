@@ -11,11 +11,11 @@ locals {
 }
 
 inputs = {
-  network_name = local.name
+  network_name = "vnet-${local.name}"
 
   subnets = [
     {
-      subnet_name           = "${local.name}-us-central1-subnet"
+      subnet_name           = "snet-k8s-01"
       subnet_ip             = "172.16.0.0/24"
       subnet_region         = "us-central1"
       subnet_private_access = "true"
@@ -23,13 +23,13 @@ inputs = {
   ]
 
   secondary_ranges = {
-    "${local.name}-us-central1-subnet" = [
+    "snet-k8s-01" = [
       {
-        range_name    = "gke-services"
+        range_name    = "k8s-services",
         ip_cidr_range = "10.0.0.0/24"
       },
       {
-        range_name    = "gke-pods"
+        range_name    = "k8s-pods",
         ip_cidr_range = "10.0.4.0/22"
       }
     ]
