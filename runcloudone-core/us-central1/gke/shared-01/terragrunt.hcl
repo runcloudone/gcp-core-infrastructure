@@ -32,14 +32,14 @@ inputs = {
   ip_range_pods     = "k8s-pods"
 
   release_channel     = "UNSPECIFIED"
-  kubernetes_version  = "1.27.16-gke.1008000"
+  kubernetes_version  = "1.29.7-gke.1104000"
   deletion_protection = false
 
   remove_default_node_pool = true
   node_pools = [
     {
       name               = "default-pool"
-      version            = "1.27.16-gke.1008000"
+      version            = "1.29.7-gke.1104000"
       machine_type       = "e2-standard-2"
       min_count          = 1
       max_count          = 3
@@ -50,4 +50,6 @@ inputs = {
       auto_upgrade       = false
     }
   ]
+
+  config_connector = true
 }
