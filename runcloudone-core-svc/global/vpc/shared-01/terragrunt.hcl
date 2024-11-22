@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "tfr:///terraform-google-modules/network/google?version=9.1.0"
+  source = "tfr:///terraform-google-modules/network/google?version=9.3.0"
 }
 
 locals {
