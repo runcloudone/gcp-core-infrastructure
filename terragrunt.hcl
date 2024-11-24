@@ -31,9 +31,7 @@ remote_state {
 }
 
 inputs = {
-  project_id = local.project_id
-  region     = local.region
-  default_labels = {
-    "OwnerEmail" = "ilya.melnik.svc@gmail.com"
-  }
+  project_id     = local.project_id
+  region         = local.region
+  default_labels = {}
 }
