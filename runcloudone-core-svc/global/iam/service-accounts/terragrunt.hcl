@@ -22,6 +22,15 @@ inputs = {
         namespace = "external-dns"
         name      = "external-dns"
       }
-    }
+    },
+    "cert-manager" = {
+      display_name  = "Cert Manager"
+      description   = "Service account for Cert Manager"
+      project_roles = ["${local.project_id}=>roles/dns.admin"]
+      workload_identity = {
+        namespace = "cert-manager"
+        name      = "cert-manager"
+      }
+    },
   }
 }
